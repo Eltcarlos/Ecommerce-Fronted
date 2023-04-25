@@ -10,7 +10,6 @@ import {
 } from "@mui/icons-material";
 import FlexBetween from "../../components/FlexBetween";
 import { useDispatch, useSelector } from "react-redux";
-import profileImage from "../../assets/profile.jpeg";
 import logo from "../../assets/logo.png";
 
 import {
@@ -62,12 +61,12 @@ const Navbar = () => {
             </IconButton>
           </FlexBetween>
           <Box position="relative" height="100%" width="50%">
-            <ShoppingCart backgroundColor={theme.palette.background.alt} sx={{ paddingLeft: 2 }} />
+            <ShoppingCart backgroundColor={theme.palette.background.alt} sx={{ paddingLeft: 2, fontSize: "40px" }} />
             <Box
               backgroundColor="red"
               borderRadius="100%"
               position="absolute"
-              top="-10px"
+              top="-8px"
               left="22px"
               sx={{ width: "18px", height: "18px", display: "flex", justifyContent: "center" }}
             >
@@ -113,7 +112,7 @@ const Navbar = () => {
                   <Box
                     component="img"
                     alt="profile"
-                    src={profileImage}
+                    // src={data.image}
                     height="32px"
                     width="32px"
                     borderRadius="50%"
@@ -121,10 +120,10 @@ const Navbar = () => {
                   />
                   <Box textAlign="left">
                     <Typography fontWeight="bold" fontSize="0.85rem" sx={{ color: theme.palette.secondary[100] }}>
-                      carlos
+                      {/* {data.name} */}
                     </Typography>
                     <Typography fontSize="0.75rem" sx={{ color: theme.palette.secondary[100] }}>
-                      admin
+                      {/* {data.occupation} */}
                     </Typography>
                   </Box>
                   <ArrowDropDownOutlined
