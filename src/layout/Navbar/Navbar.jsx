@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  LightModeOutlined,
-  DarkModeOutlined,
   Search,
   SettingsOutlined,
   ArrowDropDownOutlined,
   ShoppingCart,
+  Notifications,
   AccountCircle,
 } from "@mui/icons-material";
 import FlexBetween from "../../components/FlexBetween";
@@ -14,6 +13,7 @@ import logo from "../../assets/logo.png";
 
 import {
   AppBar,
+  Badge,
   Box,
   Button,
   IconButton,
@@ -24,34 +24,41 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { setMode } from "../../store";
-import { useGetUserQuery } from "../../store/api/api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../store/auth/authSlice";
 
-const Navbar = () => {
+const Navbar = ({ data }) => {
+  const { status } = useSelector((state) => state.authState);
+  const { productsCart } = useSelector((state) => state.globalState);
+  const [bg, setBg] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { status, uid } = useSelector((state) => state.authState);
-  // const { data } = useGetUserQuery(uid);
-  // console.log(data);
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      return window.scrollY > 50 ? setBg(true) : setBg(false);
+    });
+  }, [setBg]);
+
   return (
     <AppBar
       sx={{
-        position: "static",
-        background: "none",
+        height: "80px",
+        position: "fixed",
         boxShadow: "none",
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* LEFT SIDE */}
         <FlexBetween>
-          <Box component="img" alt="logo" src={logo} height="70px" width="120px" sx={{ objectFit: "cover" }} />
+          <Link to="/">
+            <Box component="img" alt="logo" src={logo} height="70px" width="120px" sx={{ objectFit: "cover" }} />
+          </Link>
         </FlexBetween>
         <FlexBetween>
           <FlexBetween backgroundColor={theme.palette.background.alt} borderRadius="9px" gap="3rem" p="0.1rem 1.5rem">
@@ -60,43 +67,25 @@ const Navbar = () => {
               <Search />
             </IconButton>
           </FlexBetween>
-          <Box position="relative" height="100%" width="50%">
-            <ShoppingCart backgroundColor={theme.palette.background.alt} sx={{ paddingLeft: 2, fontSize: "40px" }} />
-            <Box
-              backgroundColor="red"
-              borderRadius="100%"
-              position="absolute"
-              top="-8px"
-              left="22px"
-              sx={{ width: "18px", height: "18px", display: "flex", justifyContent: "center" }}
-            >
-              <Typography
-                sx={{
-                  color: "white",
-                }}
-                fontWeight="bold"
-                fontSize="0.75rem"
-              >
-                1
-              </Typography>
-            </Box>
-          </Box>
+          <IconButton>
+            <Badge badgeContent={productsCart.length} color="error">
+              <ShoppingCart sx={{ fontSize: "25px" }} />
+            </Badge>
+          </IconButton>
         </FlexBetween>
 
         {/* RIGHT SIDE */}
         <FlexBetween gap="1.5rem">
-          <IconButton onClick={() => dispatch(setMode())}>
-            {theme.palette.mode === "dark" ? (
-              <DarkModeOutlined sx={{ fontSize: "25px" }} />
-            ) : (
-              <LightModeOutlined sx={{ fontSize: "25px" }} />
-            )}
-          </IconButton>
           {status === "authenticated" ? (
             <>
               {" "}
               <IconButton>
                 <SettingsOutlined sx={{ fontSize: "25px" }} />
+              </IconButton>
+              <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+                <Badge badgeContent={17} color="error">
+                  <Notifications sx={{ fontSize: "25px" }} />
+                </Badge>
               </IconButton>
               <FlexBetween>
                 <Button
@@ -112,7 +101,7 @@ const Navbar = () => {
                   <Box
                     component="img"
                     alt="profile"
-                    // src={data.image}
+                    src={data.image}
                     height="32px"
                     width="32px"
                     borderRadius="50%"

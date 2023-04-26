@@ -1,25 +1,27 @@
 import React from "react";
 import CartIcon from "../Icons/CartIcon";
-import QuantityButton from "./QuantityButton";
+import { NumericFormat } from "react-number-format";
 
-const Description = ({ onQuant, onAdd, onRemove, onSetOrderedQuant }) => {
+const Description = ({ onQuant, onAdd, onRemove, onSetOrderedQuant, data }) => {
+  const discountedPercentage = Math.round(((data.oldPrice - data.price) / data.price) * 100);
+
   return (
     <section className="description">
-      <p className="pre">sneaker company</p>
-      <h1>fall limited edition sneakers</h1>
-      <p className="desc">
-        These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole,
-        they’ll withstand everything the weather can offer
-      </p>
+      <h1>{data.name}</h1>
+      <p className="desc">{data.description}</p>
       <div className="price">
         <div className="main-tag">
-          <p>$125.00</p>
-          <p>50%</p>
+          <p>
+            <NumericFormat prefix="$" displayType="text" thousandSeparator="," value={data.price} />
+          </p>
+          {data.oldPrice && <p>{discountedPercentage}%</p>}
         </div>
-        <s>$250.00</s>
+        <s>
+          {" "}
+          <NumericFormat prefix="$" displayType="text" thousandSeparator="," value={data.oldPrice} />
+        </s>
       </div>
       <div className="buttons">
-        <QuantityButton onQuant={onQuant} onRemove={onRemove} onAdd={onAdd} />
         <button
           className="add-to-cart"
           onClick={() => {

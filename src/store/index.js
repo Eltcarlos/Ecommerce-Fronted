@@ -4,7 +4,6 @@ export const globalSlice = createSlice({
   name: "global",
   initialState: {
     mode: "dark",
-    products: [],
     productsCart: [],
   },
   reducers: {

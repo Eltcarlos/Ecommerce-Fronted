@@ -5,7 +5,7 @@ export const PrincipalSidebar = () => {
   return (
     <Card sx={{ display: "flex", flexDirection: "column", width: "230px", padding: "5px" }}>
       <Typography variant="h3">Filtros</Typography>
-      <Typography variant="h3" fontWeight="bold">
+      <Typography variant="h6" fontWeight="bold">
         Rango de Precios
       </Typography>
       <Box sx={{ paddingX: "20px" }}>

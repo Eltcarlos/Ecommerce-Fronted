@@ -6,11 +6,11 @@ import { Box } from "@mui/material";
 const Layout = ({ children }) => {
   return (
     <>
-      <Box flexGrow={1} padding="15px">
-        <Navbar />
+      <Navbar />
+      <Box flexGrow={1} sx={{ marginY: "50px" }} padding="15px">
         {children}
-        <Footer />
       </Box>
+      <Footer />
     </>
   );
 };

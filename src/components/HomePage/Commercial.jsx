@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper";
+import { Autoplay } from "swiper";
 import { Box } from "@mui/material";
 
 const banner = [
@@ -17,7 +17,7 @@ const banner = [
 export const Commercial = () => {
   return (
     <>
-      <Swiper spaceBetween={50} slidesPerView={1} loop={true} speed={1000} modules={[Autoplay]} autoplay={true}>
+      <Swiper spaceBetween={50} loop={true} speed={1000} modules={[Autoplay]} autoplay={true}>
         {banner.map((banner, index) => (
           <SwiperSlide key={index}>
             <Box sx={{ display: "flex", justifyContent: "center", padding: "20px" }}>

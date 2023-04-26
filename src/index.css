@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
 :root {
-  --orange: hsl(26, 100%, 55%);
+  --orange: hsl(44, 63%, 41%);
   --pale-orange: hsl(25, 100%, 94%);
   --vd-blue: hsl(220, 13%, 13%);
   --d-grayish-blue: rgb(104, 112, 125);
@@ -339,6 +339,7 @@ header nav .right .cart button.checkout:hover {
 .description p.desc {
   color: var(--d-grayish-blue);
   font-weight: 500;
+  text-align: justify;
   line-height: 1.7;
 }
 @media (max-width: 768px) {
@@ -557,7 +558,7 @@ header nav .right .cart button.checkout:hover {
 }
 
 .MuiBadge-badge {
-  background-color: hsl(26, 100%, 55%);
+  background-color: hsl(51, 67%, 40%);
   font-family: inherit;
   font-weight: 700;
 }

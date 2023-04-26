@@ -1,27 +1,29 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import { ShoppingCart } from "@mui/icons-material";
+import { Box, Button, Card, CardContent, CardMedia, Divider, Typography } from "@mui/material";
 import React from "react";
+import { NumericFormat } from "react-number-format";
+import { Link } from "react-router-dom";
 
-export const ItemCard = () => {
+export const ItemCard = ({ product }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        alt="product"
-        height="140"
-        image="https://http2.mlstatic.com/D_NQ_NP_827517-MLA40655732582_022020-O.jpg"
-      />
+      <Link to={`/product/${product?._id}`}>
+        <CardMedia component="img" alt="product" height="140" image={product.img} />
+      </Link>
+      <Divider />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          $ 279.900
+          <NumericFormat prefix="$" displayType="text" thousandSeparator="," value={product.price} />
         </Typography>
         <Typography variant="body2" color="green">
           Envión gratis
         </Typography>
+        <Box sx={{ padding: "2px" }}>
+          <Button color="secondary" variant="contained" startIcon={<ShoppingCart />}>
+            Agregar al carrito
+          </Button>
+        </Box>
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 };

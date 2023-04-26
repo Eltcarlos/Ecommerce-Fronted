@@ -1,41 +1,49 @@
 import { useTheme } from "@emotion/react";
 import { ThumbUpAlt } from "@mui/icons-material";
+import { NumericFormat } from "react-number-format";
 import { Box, Card, CardContent, CardMedia, Rating, Typography } from "@mui/material";
 import React from "react";
 import FlexBetween from "../FlexBetween";
 
-export const ItemProductCard = () => {
+export const ItemProductCard = ({ product }) => {
   const theme = useTheme();
+  const discountedPercentage = Math.round(((product.oldPrice - product.price) / product.price) * 100);
 
   return (
-    <Card sx={{ display: "flex" }}>
+    <Card sx={{ display: "flex", width: "800px" }}>
       <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <CardMedia
-          component="img"
-          alt="product"
-          height="200"
-          image="https://http2.mlstatic.com/D_NQ_NP_827517-MLA40655732582_022020-O.jpg"
-        />
-        <CardContent sx={{ flex: "1 0 auto" }}>
-          <Box sx={{ display: "flex", flexDirection: "row" }} gap="2px">
-            <Box
-              borderRadius="5px"
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                backgroundColor: theme.palette.grey[800],
-                color: "white",
-                padding: "2px",
-              }}
-            >
-              <ThumbUpAlt />
-              <Typography component="div" variant="h5">
-                Recomendado
-              </Typography>
+        <Box sx={{ display: "flex", height: "160px", width: "200px", justifyContent: "center", textAlign: "center" }}>
+          <CardMedia
+            component="img"
+            alt="product"
+            sx={{ width: "200px", height: "200px", objectFit: "contain" }}
+            image={product.img}
+          />
+        </Box>
+        <CardContent sx={{ display: "flex", flexDirection: "column", width: "600px" }}>
+          {product.rating === 5 ? (
+            <Box sx={{ display: "flex", flexDirection: "row" }} gap="2px">
+              <Box
+                borderRadius="5px"
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  backgroundColor: theme.palette.grey[800],
+                  color: "white",
+                  padding: "2px",
+                }}
+              >
+                <ThumbUpAlt />
+                <Typography sx={{ textDecorationStyle: "none" }} component="div" variant="h5">
+                  Recomendado
+                </Typography>
+              </Box>
             </Box>
-          </Box>
+          ) : (
+            ""
+          )}
           <Typography variant="h3" paddingY="10px">
-            Microsft Xbox Series S 512GB Standard color blanco
+            {product.name}
           </Typography>
           <Typography
             variant="subtitle1"
@@ -43,16 +51,20 @@ export const ItemProductCard = () => {
             color="text.secondary"
             sx={{ textDecoration: "line-through" }}
           >
-            $ 3.774.900
+            {product.oldPrice === null ? (
+              ""
+            ) : (
+              <NumericFormat prefix="$" displayType="text" thousandSeparator="," value={product.oldPrice} />
+            )}
           </Typography>
           <FlexBetween>
             <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }} gap="5px">
               <Typography variant="h3" fontWeight="bold">
-                3.099.900
+                <NumericFormat prefix="$" displayType="text" thousandSeparator="," value={product.price} />
               </Typography>
-              <Typography color="green">17% OFF</Typography>
+              {product.oldPrice && <Typography color="green">{discountedPercentage}% OFF</Typography>}
             </Box>
-            <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+            <Rating name="half-rating" defaultValue={product.rating} precision={0.5} readOnly />
           </FlexBetween>
           <Typography color="green">Envío gratis</Typography>
         </CardContent>
