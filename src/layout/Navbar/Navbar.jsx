@@ -27,8 +27,8 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../store/auth/authSlice";
 
-const Navbar = ({ data }) => {
-  const { status } = useSelector((state) => state.authState);
+const Navbar = () => {
+  const { status, name, img, occupation } = useSelector((state) => state.authState);
   const { productsCart } = useSelector((state) => state.globalState);
   const [bg, setBg] = useState(false);
   const dispatch = useDispatch();
@@ -67,22 +67,20 @@ const Navbar = ({ data }) => {
               <Search />
             </IconButton>
           </FlexBetween>
-          <IconButton>
-            <Badge badgeContent={productsCart.length} color="error">
-              <ShoppingCart sx={{ fontSize: "25px" }} />
-            </Badge>
-          </IconButton>
+          <Link to="/cart">
+            <IconButton>
+              <Badge badgeContent={productsCart.length} color="error">
+                <ShoppingCart sx={{ fontSize: "25px" }} />
+              </Badge>
+            </IconButton>
+          </Link>
         </FlexBetween>
 
         {/* RIGHT SIDE */}
         <FlexBetween gap="1.5rem">
           {status === "authenticated" ? (
             <>
-              {" "}
               <IconButton>
-                <SettingsOutlined sx={{ fontSize: "25px" }} />
-              </IconButton>
-              <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
                 <Badge badgeContent={17} color="error">
                   <Notifications sx={{ fontSize: "25px" }} />
                 </Badge>
@@ -101,7 +99,7 @@ const Navbar = ({ data }) => {
                   <Box
                     component="img"
                     alt="profile"
-                    src={data.image}
+                    src={img}
                     height="32px"
                     width="32px"
                     borderRadius="50%"
@@ -109,10 +107,10 @@ const Navbar = ({ data }) => {
                   />
                   <Box textAlign="left">
                     <Typography fontWeight="bold" fontSize="0.85rem" sx={{ color: theme.palette.secondary[100] }}>
-                      {/* {data.name} */}
+                      {name}
                     </Typography>
                     <Typography fontSize="0.75rem" sx={{ color: theme.palette.secondary[100] }}>
-                      {/* {data.occupation} */}
+                      {occupation}
                     </Typography>
                   </Box>
                   <ArrowDropDownOutlined
@@ -128,6 +126,8 @@ const Navbar = ({ data }) => {
                   onClose={handleClose}
                   anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 >
+                  <MenuItem onClick={() => dispatch(logout("Cerro Sesion Correctamente"))}>DashBoard</MenuItem>
+
                   <MenuItem onClick={() => dispatch(logout("Cerro Sesion Correctamente"))}>Log Out</MenuItem>
                 </Menu>
               </FlexBetween>

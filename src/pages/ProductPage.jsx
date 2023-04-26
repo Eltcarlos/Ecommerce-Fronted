@@ -5,8 +5,9 @@ import Description from "../components/ProductPage/Description";
 import { FeaturedProducts } from "../components/HomePage/FeaturedProducts";
 import { useParams } from "react-router-dom";
 import { useGetProductIDQuery, useGetProductsQuery } from "../store/api/api";
+import { DrawerCart } from "../components/Sidebars/DrawerCart";
 
-export const ProductPage = () => {
+export const ProductPage = ({ showCart, setShowCart }) => {
   const { id } = useParams();
   const { data, isLoading } = useGetProductIDQuery(id);
   const { data: dataProduct, isLoading: isLoadingProduct } = useGetProductsQuery();
@@ -20,6 +21,7 @@ export const ProductPage = () => {
             <Description data={data} />
           </section>
           <FeaturedProducts data={dataProduct} />
+          <DrawerCart showCart={showCart} setShowCart={setShowCart} />
         </Layout>
       ) : (
         ""

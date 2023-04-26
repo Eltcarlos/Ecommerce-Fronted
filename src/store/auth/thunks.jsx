@@ -13,7 +13,6 @@ export const startSignIn = (form) => {
         toast.error(result.msg === "Error" ? "We can't find an account with this email address" : result.msg);
         return;
       }
-
       localStorage.setItem("token", result.token);
       dispatch(login(result.user));
     } catch (error) {

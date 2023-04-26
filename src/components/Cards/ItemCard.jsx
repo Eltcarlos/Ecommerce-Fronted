@@ -3,8 +3,12 @@ import { Box, Button, Card, CardContent, CardMedia, Divider, Typography } from "
 import React from "react";
 import { NumericFormat } from "react-number-format";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCart } from "../../store";
 
 export const ItemCard = ({ product }) => {
+  const dispatch = useDispatch();
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <Link to={`/product/${product?._id}`}>
@@ -19,7 +23,14 @@ export const ItemCard = ({ product }) => {
           Envión gratis
         </Typography>
         <Box sx={{ padding: "2px" }}>
-          <Button color="secondary" variant="contained" startIcon={<ShoppingCart />}>
+          <Button
+            onClick={() => {
+              dispatch(setCart(product));
+            }}
+            color="secondary"
+            variant="contained"
+            startIcon={<ShoppingCart />}
+          >
             Agregar al carrito
           </Button>
         </Box>

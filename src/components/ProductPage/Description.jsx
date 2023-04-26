@@ -1,9 +1,13 @@
 import React from "react";
-import CartIcon from "../Icons/CartIcon";
 import { NumericFormat } from "react-number-format";
+import { useDispatch } from "react-redux";
+import { setCart } from "../../store";
+import { Button } from "@mui/material";
+import { ShoppingCart } from "@mui/icons-material";
 
-const Description = ({ onQuant, onAdd, onRemove, onSetOrderedQuant, data }) => {
+const Description = ({ data }) => {
   const discountedPercentage = Math.round(((data.oldPrice - data.price) / data.price) * 100);
+  const dispatch = useDispatch();
 
   return (
     <section className="description">
@@ -22,15 +26,16 @@ const Description = ({ onQuant, onAdd, onRemove, onSetOrderedQuant, data }) => {
         </s>
       </div>
       <div className="buttons">
-        <button
-          className="add-to-cart"
+        <Button
           onClick={() => {
-            onSetOrderedQuant(onQuant);
+            dispatch(setCart(data));
           }}
+          color="secondary"
+          variant="contained"
+          startIcon={<ShoppingCart />}
         >
-          <CartIcon />
-          add to cart
-        </button>
+          Agregar al carrito
+        </Button>
       </div>
     </section>
   );
