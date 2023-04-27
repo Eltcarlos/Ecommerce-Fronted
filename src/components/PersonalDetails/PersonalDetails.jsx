@@ -3,8 +3,11 @@ import React from "react";
 import { Formik, Form } from "formik";
 import { Inputs } from "../Form/Inputs";
 import { PersonalDetailsValidation } from "../validation/UserValidation";
+import { useDispatch } from "react-redux";
+import { changePersonalDetails } from "../../store/auth/thunks";
 
 export const PersonalDetails = ({ data }) => {
+  const dispatch = useDispatch();
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -19,10 +22,10 @@ export const PersonalDetails = ({ data }) => {
           initialValues={{
             name: data.name,
             email: data.email,
-            mobile: "",
+            phoneNumber: data.phoneNumber ? data.phoneNumber : "",
           }}
           onSubmit={(values) => {
-            // dispatch(startSignIn(values));
+            dispatch(changePersonalDetails(values));
           }}
           validationSchema={PersonalDetailsValidation}
         >
@@ -45,7 +48,7 @@ export const PersonalDetails = ({ data }) => {
                     Correo electrónico:*
                   </Typography>
                 </Box>
-                <Inputs label="Correo Electronico" name="email" type="email" placeholder="test@gmail.com" />
+                <Inputs label="Correo Electronico" name="email" type="email" placeholder="test@gmail.com" disabled />
               </Box>
               <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <Box sx={{ width: "300px" }}>
@@ -53,7 +56,7 @@ export const PersonalDetails = ({ data }) => {
                     Mobile Number:
                   </Typography>
                 </Box>
-                <Inputs label="Opcional" name="mobile" type="number" placeholder="Numero" />
+                <Inputs label="Opcional" name="phoneNumber" type="number" placeholder="Numero" />
               </Box>
 
               <Typography component="h1" variant="h5">

@@ -1,5 +1,5 @@
 import { checkingCredentials, login } from "./authSlice";
-import { fetchSinToken } from "../../helpers/Fetch";
+import { fetchConToken, fetchSinToken } from "../../helpers/Fetch";
 import toast from "react-hot-toast";
 
 export const startSignIn = (form) => {
@@ -15,6 +15,38 @@ export const startSignIn = (form) => {
       }
       localStorage.setItem("token", result.token);
       dispatch(login(result.user));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const changePersonalDetails = (form) => {
+  return async () => {
+    try {
+      const result = await fetchConToken("api/client/personalDetails", form, "PUT");
+
+      if (!result.ok) {
+        toast.error(result.msg);
+        return;
+      }
+      toast.success(result.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const changePassword = (form) => {
+  return async () => {
+    try {
+      const result = await fetchConToken("api/client/password", form, "PUT");
+
+      if (!result.ok) {
+        toast.error(result.msg);
+        return;
+      }
+      toast.success(result.msg);
     } catch (error) {
       console.log(error);
     }

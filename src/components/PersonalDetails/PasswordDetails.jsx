@@ -3,8 +3,13 @@ import React from "react";
 import { Formik, Form } from "formik";
 import { Inputs } from "../Form/Inputs";
 import { PasswordDetailsValidation } from "../validation/UserValidation";
+import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { changePassword } from "../../store/auth/thunks";
 
 export const PasswordDetails = ({ data }) => {
+  const dispatch = useDispatch();
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -22,7 +27,11 @@ export const PasswordDetails = ({ data }) => {
             confirmPassword: "",
           }}
           onSubmit={(values) => {
-            // dispatch(startSignIn(values));
+            if (values.confirmPassword === "" || values.newPassword === "" || values.oldPassword === "") {
+              toast.error("fields not filled");
+              return;
+            }
+            dispatch(changePassword(values));
           }}
           validationSchema={PasswordDetailsValidation}
         >

@@ -8,8 +8,9 @@ import { PasswordDetails } from "../../components/PersonalDetails/PasswordDetail
 
 export const AccountSettings = () => {
   const { uid } = useSelector((state) => state.authState);
-  const { data, isLoading } = useGetClientIDQuery(uid);
-
+  const { data, isLoading } = useGetClientIDQuery(uid, {
+    refetchOnMountOrArgChange: true,
+  });
   return (
     <LayoutDashBoard>
       <Box m="1.5rem 2.5rem">

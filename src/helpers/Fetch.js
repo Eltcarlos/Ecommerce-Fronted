@@ -16,3 +16,29 @@ export const fetchSinToken = async (endpoint, data, method = "GET") => {
     return await resp.json();
   }
 };
+
+export const fetchConToken = async (endpoint, data, method = "GET") => {
+  const url = `${baseUrl}/${endpoint}`;
+  const token = localStorage.getItem("token");
+  console.log(token, data);
+  if (method === "GET") {
+    const resp = await fetch(url, {
+      method,
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    return await resp.json();
+  } else {
+    const resp = await fetch(url, {
+      method,
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(data),
+    });
+    return await resp.json();
+  }
+};
