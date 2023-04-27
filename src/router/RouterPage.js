@@ -5,6 +5,7 @@ import { ProductPage } from "../pages/ProductPage";
 import { CartPage } from "../pages/CartPage";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { SearchPage } from "../pages/SearhPage";
 
 const RouterPages = () => {
   const [showCart, setShowCart] = useState(false);
@@ -23,6 +24,7 @@ const RouterPages = () => {
         <Route path="/" element={<HomePage showCart={showCart} setShowCart={setShowCart} />} />
         <Route path="/auth/login" element={<LoginPage />} />
         <Route path="/product/:id" element={<ProductPage showCart={showCart} setShowCart={setShowCart} />} />
+        <Route path="/:search" element={<SearchPage />} />
         <Route path="/cart" element={<CartPage />} />
       </Routes>
     </>

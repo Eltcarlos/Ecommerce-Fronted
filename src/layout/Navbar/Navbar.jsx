@@ -31,6 +31,7 @@ const Navbar = () => {
   const { status, name, img, occupation } = useSelector((state) => state.authState);
   const { productsCart } = useSelector((state) => state.globalState);
   const [bg, setBg] = useState(false);
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -45,6 +46,15 @@ const Navbar = () => {
     });
   }, [setBg]);
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (search.trim()) {
+      navigate(`/${search}`);
+      setSearch(search);
+    } else {
+      navigate(`/`);
+    }
+  };
   return (
     <AppBar
       sx={{
@@ -62,10 +72,12 @@ const Navbar = () => {
         </FlexBetween>
         <FlexBetween>
           <FlexBetween backgroundColor={theme.palette.background.alt} borderRadius="9px" gap="3rem" p="0.1rem 1.5rem">
-            <InputBase placeholder="Search..." />
-            <IconButton>
-              <Search />
-            </IconButton>
+            <form onSubmit={handleSearch}>
+              <InputBase placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />
+              <IconButton type="submit">
+                <Search />
+              </IconButton>
+            </form>
           </FlexBetween>
           <Link to="/cart">
             <IconButton>

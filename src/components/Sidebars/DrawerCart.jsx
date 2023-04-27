@@ -1,7 +1,7 @@
 import { useTheme } from "@emotion/react";
 import { Delete } from "@mui/icons-material";
 import { Box, Button, Card, CardActions, CardMedia, Divider, Drawer, IconButton, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NumericFormat } from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { clearOneCart } from "../../store";
@@ -49,7 +49,12 @@ const MultiActionAreaCard = ({ product }) => {
 
 export const DrawerCart = ({ showCart, setShowCart }) => {
   const { productsCart, subTotal } = useSelector((state) => state.globalState);
-  const theme = useTheme();
+
+  useEffect(() => {
+    if (subTotal === 0) {
+      setShowCart(false);
+    }
+  }, [subTotal, setShowCart]);
 
   return (
     <Drawer
