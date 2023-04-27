@@ -8,7 +8,7 @@ import { PasswordDetails } from "../../components/PersonalDetails/PasswordDetail
 
 export const AccountSettings = () => {
   const { uid } = useSelector((state) => state.authState);
-  const { data, isLoading } = useGetClientIDQuery(uid, {
+  const { data } = useGetClientIDQuery(uid, {
     refetchOnMountOrArgChange: true,
   });
   return (

@@ -99,6 +99,7 @@ const navItemsAdmin = [
   {
     text: "Customers",
     icon: <Groups2Outlined />,
+    to: "customers",
   },
   {
     text: "Transactions",
@@ -135,6 +136,7 @@ const navItemsAdmin = [
   {
     text: "Admin",
     icon: <AdminPanelSettingsOutlined />,
+    to: "admin",
   },
   {
     text: "Performance",

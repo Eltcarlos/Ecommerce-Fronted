@@ -13,6 +13,8 @@ import { AccountSettings } from "../pages/DashBoard/AccountSettings";
 import { AddressBook } from "../pages/DashBoard/AddressBook";
 import { HelpCentre } from "../pages/DashBoard/HelpCentre";
 import { Chat } from "../pages/DashBoard/Chat";
+import { Admin } from "../pages/DashBoard/Admin/Admin";
+import { AdminPage } from "./AdminRoutes/AdminPage";
 
 const RouterPages = () => {
   const [showCart, setShowCart] = useState(false);
@@ -41,6 +43,9 @@ const RouterPages = () => {
           <Route path="/addressBook" element={<AddressBook />} />
           <Route path="/help-centre" element={<HelpCentre />} />
           <Route path="/chat" element={<Chat />} />
+          <Route element={<AdminPage />}>
+            <Route path="/admin" element={<Admin />} />
+          </Route>
         </Route>
       </Routes>
     </>
