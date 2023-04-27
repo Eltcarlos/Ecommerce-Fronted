@@ -1,11 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const token = localStorage.getItem("token");
-
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
   reducerPath: "adminApi",
-  tagTypes: ["Product", "ProductID", "Search", "ClientID", "Admins"],
+  tagTypes: ["Product", "ProductID", "Search", "ClientID", "Admins", "Clients"],
   endpoints: (build) => ({
     getProducts: build.query({
       query: () => `api/product/products`,
@@ -23,14 +21,17 @@ export const api = createApi({
       query: (id) => `api/client/${id}`,
       providesTags: ["ClientID"],
     }),
+    getClients: build.query({
+      query: (token) => ({
+        url: "api/client",
+        method: "GET",
+      }),
+      providesTags: ["Clients"],
+    }),
     getAdmins: build.query({
-      query: () => ({
+      query: (token) => ({
         url: "api/management/admins",
         method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: "Bearer " + token,
-        },
       }),
       providesTags: ["Admins"],
     }),
@@ -43,4 +44,5 @@ export const {
   useGetSearchNameQuery,
   useGetClientIDQuery,
   useGetAdminsQuery,
+  useGetClientsQuery,
 } = api;

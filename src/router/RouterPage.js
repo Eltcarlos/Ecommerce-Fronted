@@ -15,6 +15,8 @@ import { HelpCentre } from "../pages/DashBoard/HelpCentre";
 import { Chat } from "../pages/DashBoard/Chat";
 import { Admin } from "../pages/DashBoard/Admin/Admin";
 import { AdminPage } from "./AdminRoutes/AdminPage";
+import { Customers } from "../pages/DashBoard/Admin/Customers";
+import { Products } from "../pages/DashBoard/Admin/Products";
 
 const RouterPages = () => {
   const [showCart, setShowCart] = useState(false);
@@ -45,6 +47,8 @@ const RouterPages = () => {
           <Route path="/chat" element={<Chat />} />
           <Route element={<AdminPage />}>
             <Route path="/admin" element={<Admin />} />
+            <Route path="/customers" element={<Customers />} />
+            <Route path="/products" element={<Products />} />
           </Route>
         </Route>
       </Routes>

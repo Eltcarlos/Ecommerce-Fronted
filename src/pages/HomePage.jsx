@@ -14,8 +14,8 @@ export const HomePage = ({ showCart, setShowCart }) => {
       {isLoading === false ? (
         <>
           <Commercial />
-          <FeaturedProducts data={data} />
-          <RangeProducts data={data} />
+          <FeaturedProducts data={data || {}} />
+          <RangeProducts data={data || {}} />
           <DrawerCart showCart={showCart} setShowCart={setShowCart} />
         </>
       ) : (

@@ -9,7 +9,8 @@ import CustomColumnMenu from "../../../components/DataGridCustomColumnMenu";
 
 export const Admin = () => {
   const theme = useTheme();
-  const { data, isLoading } = useGetAdminsQuery({
+  const token = localStorage.getItem("token");
+  const { data, isLoading } = useGetAdminsQuery(token, {
     refetchOnMountOrArgChange: true,
   });
   console.log(data);

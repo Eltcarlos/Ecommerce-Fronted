@@ -95,6 +95,7 @@ const navItemsAdmin = [
   {
     text: "Products",
     icon: <ShoppingCartOutlined />,
+    to: "products",
   },
   {
     text: "Customers",
