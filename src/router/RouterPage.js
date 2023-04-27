@@ -6,6 +6,13 @@ import { CartPage } from "../pages/CartPage";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { SearchPage } from "../pages/SearhPage";
+import { ProtectedRouter } from "./PrivateRoutes/PrivatePage";
+import { AccountHome } from "../pages/DashBoard/AccountHome";
+import { AccountOrderHistory } from "../pages/DashBoard/AccountOrderHistory";
+import { AccountSettings } from "../pages/DashBoard/AccountSettings";
+import { AddressBook } from "../pages/DashBoard/AddressBook";
+import { HelpCentre } from "../pages/DashBoard/HelpCentre";
+import { Chat } from "../pages/DashBoard/Chat";
 
 const RouterPages = () => {
   const [showCart, setShowCart] = useState(false);
@@ -26,6 +33,15 @@ const RouterPages = () => {
         <Route path="/product/:id" element={<ProductPage showCart={showCart} setShowCart={setShowCart} />} />
         <Route path="/:search" element={<SearchPage />} />
         <Route path="/cart" element={<CartPage />} />
+        {/* Private Public Routes */}
+        <Route element={<ProtectedRouter />}>
+          <Route path="/accountHome" element={<AccountHome />} />
+          <Route path="/accountOrderHistory" element={<AccountOrderHistory />} />
+          <Route path="/accountSettings" element={<AccountSettings />} />
+          <Route path="/addressBook" element={<AddressBook />} />
+          <Route path="/help-centre" element={<HelpCentre />} />
+          <Route path="/chat" element={<Chat />} />
+        </Route>
       </Routes>
     </>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   Search,
-  SettingsOutlined,
+  Menu as MenuIcon,
   ArrowDropDownOutlined,
   ShoppingCart,
   Notifications,
@@ -27,7 +27,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../store/auth/authSlice";
 
-const Navbar = () => {
+const Navbar = ({ isSidebarOpen, setIsSidebarOpen, menu = false }) => {
   const { status, name, img, occupation } = useSelector((state) => state.authState);
   const { productsCart } = useSelector((state) => state.globalState);
   const [bg, setBg] = useState(false);
@@ -65,12 +65,18 @@ const Navbar = () => {
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* LEFT SIDE */}
+
         <FlexBetween>
           <Link to="/">
             <Box component="img" alt="logo" src={logo} height="70px" width="120px" sx={{ objectFit: "cover" }} />
           </Link>
         </FlexBetween>
         <FlexBetween>
+          {menu && (
+            <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+              <MenuIcon />
+            </IconButton>
+          )}
           <FlexBetween backgroundColor={theme.palette.background.alt} borderRadius="9px" gap="3rem" p="0.1rem 1.5rem">
             <form onSubmit={handleSearch}>
               <InputBase placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />
@@ -138,7 +144,7 @@ const Navbar = () => {
                   onClose={handleClose}
                   anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 >
-                  <MenuItem onClick={() => dispatch(logout("Cerro Sesion Correctamente"))}>DashBoard</MenuItem>
+                  <MenuItem onClick={() => navigate("/accountHome")}>DashBoard</MenuItem>
 
                   <MenuItem onClick={() => dispatch(logout("Cerro Sesion Correctamente"))}>Log Out</MenuItem>
                 </Menu>
