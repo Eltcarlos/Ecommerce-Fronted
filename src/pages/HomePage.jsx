@@ -7,29 +7,22 @@ import { useGetProductsPaginationQuery, useGetProductsQuery } from "../store/api
 import { DrawerCart } from "../components/Sidebars/DrawerCart";
 
 export const HomePage = ({ showCart, setShowCart }) => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState();
   const [pageSize, setPageSize] = useState(5);
-  const [sort, setSort] = useState({});
-  const { data: Featured } = useGetProductsQuery();
-  const { data, isLoading } = useGetProductsPaginationQuery(
-    {
-      page,
-      pageSize,
-      sort: JSON.stringify(sort),
-    },
-    {
-      refetchOnMountOrArgChange: true,
-    }
-  );
+  const { data: Featured, isLoading: isLoadingFeatured } = useGetProductsQuery();
+  const { data, isLoading } = useGetProductsPaginationQuery({
+    page,
+    pageSize,
+  });
 
   return (
     <Layout>
-      {isLoading === false ? (
+      {!isLoading && !isLoadingFeatured ? (
         <>
           <Commercial />
-          <FeaturedProducts data={Featured || {}} />
-          <RangeProducts data={data || {}} setPage={setPage} setPageSize={setPageSize} />
-          <DrawerCart showCart={showCart} setShowCart={setShowCart} />
+          <FeaturedProducts data={Featured || []} />
+          <RangeProducts key={data._id} data={data.docs || []} setPage={setPage} page={data.totalPages || []} />
+          <DrawerCart showCart={showCart} setShowCart={setShowCart} key={data._id} />
         </>
       ) : (
         ""

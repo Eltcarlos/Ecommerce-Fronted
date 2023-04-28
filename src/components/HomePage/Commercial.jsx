@@ -10,7 +10,7 @@ const banner = [
   },
   {
     id: 2,
-    url: "https://res.cloudinary.com/dwzcq0mdv/image/upload/v1682375622/ecommerce/BANNER-OFICIAL-INTEL-500-SERIES_hqbl0b.png",
+    url: "https://res.cloudinary.com/dwzcq0mdv/image/upload/v1682673631/promo-banner-healthy-lifestyle-natural-260nw-1996820612_gvwacf.webp",
   },
 ];
 

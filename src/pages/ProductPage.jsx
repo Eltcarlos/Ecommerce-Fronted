@@ -9,12 +9,8 @@ import { DrawerCart } from "../components/Sidebars/DrawerCart";
 
 export const ProductPage = ({ showCart, setShowCart }) => {
   const { id } = useParams();
-  const { data, isLoading } = useGetProductIDQuery(id, {
-    refetchOnMountOrArgChange: true,
-  });
-  const { data: dataProduct, isLoading: isLoadingProduct } = useGetProductsQuery({
-    refetchOnMountOrArgChange: true,
-  });
+  const { data, isLoading } = useGetProductIDQuery(id);
+  const { data: dataProduct, isLoading: isLoadingProduct } = useGetProductsQuery();
 
   return (
     <>
@@ -25,7 +21,7 @@ export const ProductPage = ({ showCart, setShowCart }) => {
             <Description data={data} />
           </section>
           <FeaturedProducts data={dataProduct} />
-          <DrawerCart showCart={showCart} setShowCart={setShowCart} />
+          <DrawerCart showCart={showCart} setShowCart={setShowCart} key={data._id} />
         </Layout>
       ) : (
         ""

@@ -92,8 +92,8 @@ export const DrawerCart = ({ showCart, setShowCart }) => {
           </Link>
         </Box>
         <Divider />
-        {productsCart.map((product) => {
-          return <MultiActionAreaCard product={product} />;
+        {productsCart.map((product, index) => {
+          return <MultiActionAreaCard product={product} key={index} />;
         })}
       </Box>
     </Drawer>

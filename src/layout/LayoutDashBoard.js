@@ -9,9 +9,7 @@ export const LayoutDashBoard = ({ children }) => {
   const isNonMobile = useMediaQuery("(min-width: 600px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const { uid } = useSelector((state) => state.authState);
-  const { data } = useGetClientIDQuery(uid, {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data } = useGetClientIDQuery(uid);
   return (
     <>
       <Box display={isNonMobile ? "flex" : "block"} width="100%" height="100%">

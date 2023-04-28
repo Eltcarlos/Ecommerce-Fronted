@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
   reducerPath: "adminApi",
+  refetchOnMountOrArgChange: true,
   tagTypes: ["Product", "ProductID", "Search", "ClientID", "Admins", "Clients", "ProductPagination"],
   endpoints: (build) => ({
     getProducts: build.query({
@@ -10,10 +11,10 @@ export const api = createApi({
       providesTags: ["Product"],
     }),
     getProductsPagination: build.query({
-      query: ({ page, pageSize, sort }) => ({
+      query: ({ page, pageSize }) => ({
         url: "api/product/products/pagination",
         method: "GET",
-        params: { page, pageSize, sort },
+        params: { page, pageSize },
       }),
       providesTags: ["ProductPagination"],
     }),

@@ -6,9 +6,7 @@ import { LayoutDashBoard } from "../../../layout/LayoutDashBoard";
 import Table1 from "../../../components/Tables/Table";
 
 export const Customers = () => {
-  const { data } = useGetClientsQuery({
-    refetchOnMountOrArgChange: true,
-  });
+  const { data } = useGetClientsQuery();
 
   const columns = [
     {
@@ -56,7 +54,7 @@ export const Customers = () => {
       <Box m="1.5rem 2.5rem">
         <Header title="CUSTOMERS" subtitle="List of Customers" />
         <Box mt="40px" height="75vh">
-          <Table1 rows={data || {}} columns={columns} />
+          <Table1 rows={data || []} columns={columns} />
         </Box>
       </Box>
     </LayoutDashBoard>

@@ -3,7 +3,7 @@ import React from "react";
 import { ItemProductCard } from "../Cards/ItemProductCard";
 import { Link } from "react-router-dom";
 
-export const RangeProducts = ({ data, setPage, setPageSize }) => {
+export const RangeProducts = ({ data, setPage, page }) => {
   const handleChange = (e, p) => {
     setPage(p);
   };
@@ -14,12 +14,18 @@ export const RangeProducts = ({ data, setPage, setPageSize }) => {
         <ListItem sx={{ display: "flex", flexDirection: "column", gap: "2px" }}>
           {data.map((product, index) => {
             return (
-              <Link to={`/product/${product?._id}`} style={{ textDecoration: "none" }}>
+              <Link to={`/product/${product?._id}`} style={{ textDecoration: "none" }} key={index}>
                 <ItemProductCard product={product} />
               </Link>
             );
           })}
-          <Pagination onChange={handleChange} count={10} variant="outlined" shape="rounded" sx={{ paddingY: "20px" }} />
+          <Pagination
+            onChange={handleChange}
+            count={page}
+            variant="outlined"
+            shape="rounded"
+            sx={{ paddingY: "20px" }}
+          />
         </ListItem>
       </Grid>
     </Grid>

@@ -31,10 +31,10 @@ const ProductAdd = ({ productsCart, subTotal }) => {
       </Typography>
       <Divider />
       <ListItem sx={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-        {productsCart.map((product) => {
+        {productsCart.map((product, index) => {
           return (
             <Link to={`/product/${product?._id}`} style={{ textDecoration: "none" }}>
-              <ItemProductCard product={product} />
+              <ItemProductCard product={product} key={index} />
             </Link>
           );
         })}

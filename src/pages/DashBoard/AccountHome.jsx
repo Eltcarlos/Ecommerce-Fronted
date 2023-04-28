@@ -39,7 +39,6 @@ export const AccountHome = () => {
                     alignItems: "center",
                     paddingY: "50px",
                   }}
-                  space
                 >
                   <Box component="img" alt="profile" src={box} width="100px" sx={{ objectFit: "cover" }} />
                   <Typography variant="h6" fontWeight="light">

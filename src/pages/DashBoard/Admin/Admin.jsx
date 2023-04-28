@@ -8,9 +8,7 @@ import Table1 from "../../../components/Tables/Table";
 
 export const Admin = () => {
   const token = localStorage.getItem("token");
-  const { data, isLoading } = useGetAdminsQuery(token, {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data, isLoading } = useGetAdminsQuery(token);
 
   const columns = [
     {
@@ -58,7 +56,7 @@ export const Admin = () => {
       <Box m="1.5rem 2.5rem">
         <Header title="ADMINS" subtitle="Managing admins and list of admins" />
         <Box mt="40px" height="75vh">
-          <Table1 rows={data || {}} columns={columns} />
+          <Table1 rows={data || []} columns={columns} />
         </Box>
       </Box>
     </LayoutDashBoard>
