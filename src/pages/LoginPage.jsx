@@ -2,9 +2,6 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -67,11 +64,14 @@ export const LoginPage = () => {
           <Box>
             <Formik
               initialValues={{
-                email: "carlos",
+                email: "",
                 password: "",
                 remember: false,
               }}
               onSubmit={(values) => {
+                if (values.email === "" || values.password === "") {
+                  return;
+                }
                 dispatch(startSignIn(values));
               }}
               validationSchema={LoginValidation}
@@ -94,8 +94,8 @@ export const LoginPage = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link to="/auth/register" variant="body2">
+                  Don't have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>

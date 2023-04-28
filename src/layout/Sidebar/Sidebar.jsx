@@ -32,6 +32,8 @@ import {
   WhereToVote,
   QuestionMark,
   Chat,
+  Visibility,
+  VisibilityOff,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -107,28 +109,12 @@ const navItemsAdmin = [
     icon: <ReceiptLongOutlined />,
   },
   {
-    text: "Geography",
-    icon: <PublicOutlined />,
-  },
-  {
     text: "Sales",
     icon: null,
   },
   {
     text: "Overview",
     icon: <PointOfSaleOutlined />,
-  },
-  {
-    text: "Daily",
-    icon: <TodayOutlined />,
-  },
-  {
-    text: "Monthly",
-    icon: <CalendarMonthOutlined />,
-  },
-  {
-    text: "Breakdown",
-    icon: <PieChartOutlined />,
   },
   {
     text: "Management",
@@ -139,15 +125,10 @@ const navItemsAdmin = [
     icon: <AdminPanelSettingsOutlined />,
     to: "admin",
   },
-  {
-    text: "Performance",
-    icon: <TrendingUpOutlined />,
-  },
 ];
 
 const Sidebar = ({ user, drawerWidth, isSidebarOpen, setIsSidebarOpen, isNonMobile }) => {
   const { pathname } = useLocation();
-  console.log(pathname);
   const [nav, setNav] = useState([]);
   const [active, setActive] = useState("");
   const navigate = useNavigate();
@@ -256,12 +237,11 @@ const Sidebar = ({ user, drawerWidth, isSidebarOpen, setIsSidebarOpen, isNonMobi
                   {user.occupation}
                 </Typography>
               </Box>
-              <SettingsOutlined
-                sx={{
-                  color: theme.palette.secondary[300],
-                  fontSize: "25px ",
-                }}
-              />
+              {user.role === "admin" && (
+                <IconButton onClick={() => setNav(navItemsUser)}>
+                  <Visibility />
+                </IconButton>
+              )}
             </FlexBetween>
           </Box>
         </Drawer>

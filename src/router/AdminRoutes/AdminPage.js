@@ -10,5 +10,5 @@ export const AdminPage = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  return token ? data.role === "admin" ? <Outlet /> : <Navigate to="/*" /> : <Navigate to="/login" />;
+  return token ? data.role === "admin" ? <Outlet /> : <Navigate to="/*" /> : <Navigate to="/auth/login" />;
 };

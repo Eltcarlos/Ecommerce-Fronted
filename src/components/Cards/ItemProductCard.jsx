@@ -16,7 +16,7 @@ export const ItemProductCard = ({ product }) => {
           <CardMedia
             component="img"
             alt="product"
-            sx={{ width: "200px", height: "200px", objectFit: "contain" }}
+            sx={{ width: "200px", height: "200px", objectFit: "contain", padding: "15px" }}
             image={product.img}
           />
         </Box>

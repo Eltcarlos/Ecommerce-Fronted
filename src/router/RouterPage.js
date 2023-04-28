@@ -17,6 +17,8 @@ import { Admin } from "../pages/DashBoard/Admin/Admin";
 import { AdminPage } from "./AdminRoutes/AdminPage";
 import { Customers } from "../pages/DashBoard/Admin/Customers";
 import { Products } from "../pages/DashBoard/Admin/Products";
+import { RegisterPage } from "../pages/RegisterPage";
+import { NotFoundPage } from "../pages/NotFoundPage";
 
 const RouterPages = () => {
   const [showCart, setShowCart] = useState(false);
@@ -37,6 +39,8 @@ const RouterPages = () => {
         <Route path="/product/:id" element={<ProductPage showCart={showCart} setShowCart={setShowCart} />} />
         <Route path="/:search" element={<SearchPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/auth/register" element={<RegisterPage />} />
+        <Route path="/*" element={<NotFoundPage />} />
         {/* Private Public Routes */}
         <Route element={<ProtectedRouter />}>
           <Route path="/accountHome" element={<AccountHome />} />

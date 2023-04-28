@@ -12,7 +12,7 @@ export const ItemCard = ({ product }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <Link to={`/product/${product?._id}`}>
-        <CardMedia component="img" alt="product" height="140" image={product.img} />
+        <CardMedia component="img" alt="product" height="140" image={product.img} sx={{ padding: "10px" }} />
       </Link>
       <Divider />
       <CardContent>

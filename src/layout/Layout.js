@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 
 const Layout = ({ children }) => {
   return (

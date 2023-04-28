@@ -21,6 +21,25 @@ export const startSignIn = (form) => {
   };
 };
 
+export const startSignUp = (form) => {
+  return async (dispatch) => {
+    try {
+      dispatch(checkingCredentials());
+      const result = await fetchSinToken("api/auth/register", form, "POST");
+      console.log(result);
+
+      if (!result.ok) {
+        toast.error(result.msg === "Error" ? "We can't find an account with this email address" : result.msg);
+        return;
+      }
+      localStorage.setItem("token", result.token);
+      dispatch(login(result.user));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const changePersonalDetails = (form) => {
   return async () => {
     try {

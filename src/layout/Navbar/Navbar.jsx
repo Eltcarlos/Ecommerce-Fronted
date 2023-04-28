@@ -6,6 +6,8 @@ import {
   ShoppingCart,
   Notifications,
   AccountCircle,
+  Dashboard,
+  Logout,
 } from "@mui/icons-material";
 import FlexBetween from "../../components/FlexBetween";
 import { useDispatch, useSelector } from "react-redux";
@@ -144,9 +146,13 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, menu = false }) => {
                   onClose={handleClose}
                   anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 >
-                  <MenuItem onClick={() => navigate("/accountHome")}>DashBoard</MenuItem>
-
-                  <MenuItem onClick={() => dispatch(logout("Cerro Sesion Correctamente"))}>Log Out</MenuItem>
+                  <MenuItem onClick={() => navigate("/accountHome")}>
+                    <Dashboard /> DashBoard
+                  </MenuItem>
+                  <MenuItem onClick={() => dispatch(logout("Cerro Sesion Correctamente"))}>
+                    <Logout />
+                    Log Out
+                  </MenuItem>
                 </Menu>
               </FlexBetween>
             </>

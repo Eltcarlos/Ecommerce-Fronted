@@ -56,7 +56,7 @@ export const PersonalDetails = ({ data }) => {
                     Mobile Number:
                   </Typography>
                 </Box>
-                <Inputs label="Opcional" name="phoneNumber" type="number" placeholder="Numero" />
+                <Inputs label="Opcional" name="phoneNumber" type="text" placeholder="Numero" />
               </Box>
 
               <Typography component="h1" variant="h5">
