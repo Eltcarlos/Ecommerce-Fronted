@@ -89,6 +89,7 @@ const navItemsAdmin = [
   {
     text: "Dashboard",
     icon: <HomeOutlined />,
+    to: "dashBoard",
   },
   {
     text: "Client Facing",
@@ -107,6 +108,7 @@ const navItemsAdmin = [
   {
     text: "Transactions",
     icon: <ReceiptLongOutlined />,
+    to: "transactions",
   },
   {
     text: "Sales",
@@ -115,6 +117,7 @@ const navItemsAdmin = [
   {
     text: "Overview",
     icon: <PointOfSaleOutlined />,
+    to: "overview",
   },
   {
     text: "Management",

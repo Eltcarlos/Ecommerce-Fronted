@@ -19,6 +19,9 @@ import { Customers } from "../pages/DashBoard/Admin/Customers";
 import { Products } from "../pages/DashBoard/Admin/Products";
 import { RegisterPage } from "../pages/RegisterPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
+import { DashBoard } from "../pages/DashBoard/Admin/DashBoard";
+import { Transactions } from "../pages/DashBoard/Admin/Transactions";
+import { OverView } from "../pages/DashBoard/Admin/OverView";
 
 const RouterPages = () => {
   const [showCart, setShowCart] = useState(false);
@@ -37,7 +40,7 @@ const RouterPages = () => {
         <Route path="/" element={<HomePage showCart={showCart} setShowCart={setShowCart} />} />
         <Route path="/auth/login" element={<LoginPage />} />
         <Route path="/product/:id" element={<ProductPage showCart={showCart} setShowCart={setShowCart} />} />
-        <Route path="/:search" element={<SearchPage />} />
+        <Route path="/search/:search" element={<SearchPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/auth/register" element={<RegisterPage />} />
         <Route path="/*" element={<NotFoundPage />} />
@@ -53,6 +56,9 @@ const RouterPages = () => {
             <Route path="/admin" element={<Admin />} />
             <Route path="/customers" element={<Customers />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/dashBoard" element={<DashBoard />} />
+            <Route path="/transactions" element={<Transactions />} />
+            <Route path="/overview" element={<OverView />} />
           </Route>
         </Route>
       </Routes>

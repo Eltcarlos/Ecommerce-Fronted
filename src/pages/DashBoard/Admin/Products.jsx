@@ -61,7 +61,9 @@ const Product = ({ _id, name, description, price, rating, category, supply }) =>
 };
 
 export const Products = () => {
-  const { data, isLoading } = useGetProductsQuery();
+  const { data, isLoading } = useGetProductsQuery({
+    refetchOnMountOrArgChange: true,
+  });
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
   return (

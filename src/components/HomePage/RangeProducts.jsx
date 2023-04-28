@@ -1,18 +1,16 @@
-import { Grid, ListItem } from "@mui/material";
+import { Grid, ListItem, Pagination } from "@mui/material";
 import React from "react";
-import { PrincipalSidebar } from "../Sidebars/PrincipalSidebar";
 import { ItemProductCard } from "../Cards/ItemProductCard";
 import { Link } from "react-router-dom";
 
-export const RangeProducts = ({ data }) => {
+export const RangeProducts = ({ data, setPage, setPageSize }) => {
+  const handleChange = (e, p) => {
+    setPage(p);
+  };
+
   return (
     <Grid container spacing={2}>
-      <Grid item xs={3}>
-        <ListItem>
-          <PrincipalSidebar />
-        </ListItem>
-      </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={12}>
         <ListItem sx={{ display: "flex", flexDirection: "column", gap: "2px" }}>
           {data.map((product, index) => {
             return (
@@ -21,6 +19,7 @@ export const RangeProducts = ({ data }) => {
               </Link>
             );
           })}
+          <Pagination onChange={handleChange} count={10} variant="outlined" shape="rounded" sx={{ paddingY: "20px" }} />
         </ListItem>
       </Grid>
     </Grid>

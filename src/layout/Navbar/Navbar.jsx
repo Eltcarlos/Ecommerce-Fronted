@@ -51,7 +51,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, menu = false }) => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (search.trim()) {
-      navigate(`/${search}`);
+      navigate(`/search/${search}`);
       setSearch(search);
     } else {
       navigate(`/`);
