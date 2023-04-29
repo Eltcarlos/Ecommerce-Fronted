@@ -8,7 +8,7 @@ import { DrawerCart } from "../components/Sidebars/DrawerCart";
 
 export const HomePage = ({ showCart, setShowCart }) => {
   const [page, setPage] = useState();
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize] = useState(5);
   const { data: Featured, isLoading: isLoadingFeatured } = useGetProductsQuery();
   const { data, isLoading } = useGetProductsPaginationQuery({
     page,

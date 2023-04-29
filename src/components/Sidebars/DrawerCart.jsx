@@ -1,17 +1,27 @@
-import { useTheme } from "@emotion/react";
-import { Delete } from "@mui/icons-material";
+import { Add, Delete, Remove } from "@mui/icons-material";
 import { Box, Button, Card, CardActions, CardMedia, Divider, Drawer, IconButton, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NumericFormat } from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
-import { clearOneCart } from "../../store";
+import { clearOneCart, setCartButton } from "../../store";
 import { Link } from "react-router-dom";
 
 const MultiActionAreaCard = ({ product }) => {
   const dispatch = useDispatch();
+  const [counter, setCounter] = useState(product.count);
+  const removeCount = () => {
+    setCounter(counter - 1);
+    dispatch(setCartButton({ ...product, count: 1, remove: true }));
+  };
+  const addCount = () => {
+    setCounter(counter + 1);
+    dispatch(setCartButton({ ...product, count: 1, remove: false }));
+  };
+  console.log(counter);
+
   return (
     <Card sx={{ display: "flex", width: "150px", background: "none" }}>
-      <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center" }}>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Box>
           <CardMedia
             component="img"
@@ -22,17 +32,14 @@ const MultiActionAreaCard = ({ product }) => {
         <Typography variant="h5" component="div" fontWeight="bold">
           <NumericFormat prefix="$" displayType="text" thousandSeparator="," value={product.price} />
         </Typography>
-        <CardActions>
-          <select name="lenguajes" id="lang">
-            <option value="javascript">JavaScript</option>
-            <option value="php">PHP</option>
-            <option value="java">Java</option>
-            <option value="golang">Golang</option>
-            <option value="python">Python</option>
-            <option value="c#">C#</option>
-            <option value="C++">C++</option>
-            <option value="erlang">Erlang</option>
-          </select>
+        <CardActions
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <IconButton
             onClick={() => {
               dispatch(clearOneCart(product._id));
@@ -40,6 +47,24 @@ const MultiActionAreaCard = ({ product }) => {
           >
             <Delete sx={{ fontSize: "25px" }} />
           </IconButton>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 1,
+              border: 1,
+            }}
+          >
+            <IconButton onClick={() => removeCount()} disabled={counter === 1}>
+              <Remove />
+            </IconButton>
+            {counter}
+            <IconButton onClick={() => addCount()} disabled={counter === product.amount}>
+              <Add />
+            </IconButton>
+          </Box>
         </CardActions>
       </Box>
       <Divider />

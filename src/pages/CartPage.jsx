@@ -1,11 +1,16 @@
 import React from "react";
 import Layout from "../layout/Layout";
 import { Commercial } from "../components/HomePage/Commercial";
-import { Box, CardMedia, Divider, ListItem, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
+import { Box, CardMedia, Divider, IconButton, ListItem, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ItemProductCard } from "../components/Cards/ItemProductCard";
 import { NumericFormat } from "react-number-format";
+import { Delete } from "@mui/icons-material";
+import { clearCart, clearOneCart } from "../store";
+import FlexBetween from "../components/FlexBetween";
+import { useDataTableCart } from "../hooks/useDataTableCart";
+import Table1 from "../components/Tables/Table";
 
 const Empty = () => {
   return (
@@ -23,37 +28,68 @@ const Empty = () => {
   );
 };
 
-const ProductAdd = ({ productsCart, subTotal }) => {
+const ProductAdd = ({ productsCart, subTotal, dispatch, columns }) => {
+  const newProductsTable = [...productsCart, { _id: "", name: "", category: "", count: "SubTotal", price: subTotal }];
   return (
     <>
-      <Typography variant="h6" sx={{ fontSize: 32 }} fontWeight="bold">
-        Tu Carrito
-      </Typography>
+      <FlexBetween>
+        <Typography variant="h6" sx={{ fontSize: 32 }} fontWeight="bold">
+          Tu Carrito
+        </Typography>
+        <IconButton
+          color="secondary"
+          onClick={() => {
+            dispatch(clearCart());
+          }}
+        >
+          Borrar carrito
+          <Delete color="red" style={{ fontSize: 30 }} />
+        </IconButton>
+      </FlexBetween>
       <Divider />
       <ListItem sx={{ display: "flex", flexDirection: "column", gap: "2px" }}>
         {productsCart.map((product, index) => {
           return (
-            <Link to={`/product/${product?._id}`} style={{ textDecoration: "none" }}>
-              <ItemProductCard product={product} key={index} />
-            </Link>
+            <>
+              <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <Link to={`/product/${product?._id}`} style={{ textDecoration: "none" }} key={index}>
+                  <ItemProductCard product={product} key={index} />
+                </Link>
+                <IconButton
+                  onClick={() => {
+                    dispatch(clearOneCart(product._id));
+                  }}
+                >
+                  <Delete style={{ fontSize: 30 }} />
+                </IconButton>
+              </Box>
+              <Typography>Cantidad: {product.count}</Typography>
+            </>
           );
         })}
       </ListItem>
       <Divider />
-      <Typography variant="h6" sx={{ fontSize: 32, justifyItems: "center" }} fontWeight="bold">
-        subTotal : <NumericFormat prefix="$" displayType="text" thousandSeparator="," value={subTotal} />
-      </Typography>
+      <Box mt="40px" height="300px">
+        <Table1 rows={newProductsTable || []} columns={columns} />
+      </Box>
     </>
   );
 };
 
 export const CartPage = () => {
+  const dispatch = useDispatch;
+  const { columns } = useDataTableCart();
+
   const { productsCart, subTotal } = useSelector((state) => state.globalState);
   return (
     <Layout>
       <Commercial />
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        {productsCart.length === 0 ? <Empty /> : <ProductAdd productsCart={productsCart} subTotal={subTotal} />}
+        {productsCart.length === 0 ? (
+          <Empty />
+        ) : (
+          <ProductAdd productsCart={productsCart} subTotal={subTotal} dispatch={dispatch()} columns={columns} />
+        )}
       </Box>
     </Layout>
   );

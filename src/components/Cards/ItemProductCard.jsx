@@ -8,7 +8,6 @@ import FlexBetween from "../FlexBetween";
 export const ItemProductCard = ({ product }) => {
   const theme = useTheme();
   const discountedPercentage = Math.round(((product.oldPrice - product.price) / product.price) * 100);
-
   return (
     <Card sx={{ display: "flex", width: "800px" }}>
       <Box sx={{ display: "flex", flexDirection: "row" }}>
@@ -16,12 +15,12 @@ export const ItemProductCard = ({ product }) => {
           <CardMedia
             component="img"
             alt="product"
-            sx={{ width: "200px", height: "200px", objectFit: "contain", padding: "15px" }}
+            sx={{ width: "200px", height: "180px", objectFit: "contain", paddingY: "35px" }}
             image={product.img}
           />
         </Box>
         <CardContent sx={{ display: "flex", flexDirection: "column", width: "600px" }}>
-          {product.rating === 5 ? (
+          {product.rating >= 4.7 ? (
             <Box sx={{ display: "flex", flexDirection: "row" }} gap="2px">
               <Box
                 borderRadius="5px"

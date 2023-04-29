@@ -12,17 +12,35 @@ export const globalSlice = createSlice({
       state.mode = state.mode === "light" ? "dark" : "light";
     },
     setCart: (state, { payload }) => {
-      state.productsCart = [...state.productsCart, payload];
+      const item = state.productsCart.find((item) => item._id === payload._id);
+      if (item) {
+        item.count += payload.count;
+      } else {
+        state.productsCart = [...state.productsCart, payload];
+      }
       state.subTotal =
         state.productsCart.length !== 0 &&
         state.productsCart.reduce((previous, current) => {
-          return previous + current.price;
+          return previous + current.price * current.count;
+        }, 0);
+    },
+    setCartButton: (state, { payload }) => {
+      const item = state.productsCart.find((item) => item._id === payload._id);
+      if (item) {
+        payload.remove ? (item.count -= payload.count) : (item.count += payload.count);
+      } else {
+        state.productsCart = [...state.productsCart, payload];
+      }
+      state.subTotal =
+        state.productsCart.length !== 0 &&
+        state.productsCart.reduce((previous, current) => {
+          return previous + current.price * current.count;
         }, 0);
     },
     clearOneCart: (state, { payload }) => {
-      state.productsCart = state.productsCart.filter((index) => index._id !== payload);
+      state.productsCart = state.productsCart.filter((item) => item._id !== payload);
       state.subTotal = state.productsCart.reduce((previous, current) => {
-        return previous + current.price;
+        return previous + current.price * current.count;
       }, 0);
     },
     clearCart: (state) => {
@@ -33,4 +51,4 @@ export const globalSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setModem, setCart, clearCart, clearOneCart } = globalSlice.actions;
+export const { setModem, setCart, clearCart, clearOneCart, setCount, setCartButton } = globalSlice.actions;
