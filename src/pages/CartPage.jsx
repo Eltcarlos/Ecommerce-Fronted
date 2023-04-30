@@ -1,12 +1,12 @@
 import React from "react";
 import Layout from "../layout/Layout";
 import { Commercial } from "../components/HomePage/Commercial";
-import { Box, CardMedia, Divider, IconButton, ListItem, Typography } from "@mui/material";
+import { Box, Button, CardMedia, Divider, IconButton, ListItem, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { ItemProductCard } from "../components/Cards/ItemProductCard";
 import { NumericFormat } from "react-number-format";
-import { Delete } from "@mui/icons-material";
+import { Delete, ShoppingCart } from "@mui/icons-material";
 import { clearCart, clearOneCart } from "../store";
 import FlexBetween from "../components/FlexBetween";
 import { useDataTableCart } from "../hooks/useDataTableCart";
@@ -72,6 +72,11 @@ const ProductAdd = ({ productsCart, subTotal, dispatch, columns }) => {
       <Box mt="40px" height="300px">
         <Table1 rows={newProductsTable || []} columns={columns} />
       </Box>
+      <Link to="/checkout">
+        <Button color="secondary" variant="contained" startIcon={<ShoppingCart />}>
+          ir al Checkout
+        </Button>
+      </Link>
     </>
   );
 };

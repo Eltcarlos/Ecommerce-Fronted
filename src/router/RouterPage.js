@@ -22,6 +22,7 @@ import { NotFoundPage } from "../pages/NotFoundPage";
 import { DashBoard } from "../pages/DashBoard/Admin/DashBoard";
 import { Transactions } from "../pages/DashBoard/Admin/Transactions";
 import { OverView } from "../pages/DashBoard/Admin/OverView";
+import { PaymentPage } from "../pages/PaymentPage";
 
 const RouterPages = () => {
   const [showCart, setShowCart] = useState(false);
@@ -44,6 +45,7 @@ const RouterPages = () => {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/auth/register" element={<RegisterPage />} />
         <Route path="/*" element={<NotFoundPage />} />
+        <Route path="/checkout" element={<PaymentPage />} />
         {/* Private Public Routes */}
         <Route element={<ProtectedRouter />}>
           <Route path="/accountHome" element={<AccountHome />} />

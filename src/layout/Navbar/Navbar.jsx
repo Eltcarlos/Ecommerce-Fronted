@@ -63,6 +63,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, menu = false }) => {
         height: "80px",
         position: "fixed",
         boxShadow: "none",
+        backgroundColor: "secondary.main",
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -135,7 +136,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, menu = false }) => {
                   </Box>
                   <ArrowDropDownOutlined
                     sx={{
-                      color: theme.palette.secondary[300],
+                      color: theme.palette.secondary[100],
                       fontSize: "25px",
                     }}
                   />
