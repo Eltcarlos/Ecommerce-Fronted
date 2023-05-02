@@ -9,6 +9,7 @@ import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { newAddress } from "../../store/auth/thunks";
 import { v4 as uuidv4 } from "uuid";
+import { setAddresses } from "../../store/auth/authSlice";
 
 export const NewAddress = ({ setAdd }) => {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ export const NewAddress = ({ setAdd }) => {
               return;
             }
             dispatch(newAddress(values));
+            dispatch(setAddresses(values));
             setAdd(false);
           }}
           validationSchema={AddressValidation}

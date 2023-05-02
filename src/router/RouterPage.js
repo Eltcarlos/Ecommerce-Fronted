@@ -48,15 +48,6 @@ const RouterPages = () => {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/auth/register" element={<RegisterPage />} />
         <Route path="/*" element={<NotFoundPage />} />
-        <Route path="/checkout/shippingAddress" element={<ShippingAddressPage setForm={setForm} form={form} />} />
-        <Route
-          path="/checkout/shippingAddress/paymentsDetails"
-          element={<PaymentDetailsPage setForm={setForm} form={form} />}
-        />
-        <Route
-          path="/checkout/shippingAddress/paymentsDetails/reviewYourOrders"
-          element={<ReviewYourOrderPage setForm={setForm} form={form} />}
-        />
         {/* Private Public Routes */}
         <Route element={<ProtectedRouter />}>
           <Route path="/accountHome" element={<AccountHome />} />
@@ -65,6 +56,15 @@ const RouterPages = () => {
           <Route path="/addressBook" element={<AddressBook />} />
           <Route path="/help-centre" element={<HelpCentre />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/checkout/shippingAddress" element={<ShippingAddressPage setForm={setForm} form={form} />} />
+          <Route
+            path="/checkout/shippingAddress/paymentsDetails"
+            element={<PaymentDetailsPage setForm={setForm} form={form} />}
+          />
+          <Route
+            path="/checkout/shippingAddress/paymentsDetails/reviewYourOrders"
+            element={<ReviewYourOrderPage setForm={setForm} form={form} />}
+          />
           <Route element={<AdminPage />}>
             <Route path="/admin" element={<Admin />} />
             <Route path="/customers" element={<Customers />} />

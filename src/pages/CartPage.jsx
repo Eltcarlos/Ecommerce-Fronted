@@ -72,7 +72,7 @@ const ProductAdd = ({ productsCart, subTotal, dispatch, columns }) => {
       <Box mt="40px" height="300px">
         <Table1 rows={newProductsTable || []} columns={columns} />
       </Box>
-      <Link to="/checkout">
+      <Link to="/checkout/shippingAddress">
         <Button color="secondary" variant="contained" startIcon={<ShoppingCart />}>
           ir al Checkout
         </Button>

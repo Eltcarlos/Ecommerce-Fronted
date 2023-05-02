@@ -7,6 +7,7 @@ export const authSlice = createSlice({
     uid: null,
     name: null,
     img: null,
+    addresses: [],
     occupation: null,
     errorMessage: null,
   },
@@ -16,13 +17,18 @@ export const authSlice = createSlice({
       state.uid = payload._id;
       state.name = payload.name;
       state.img = payload.image;
+      state.addresses = payload.addresses;
       state.occupation = payload.occupation;
       state.errorMessage = null;
+    },
+    setAddresses: (state, { payload }) => {
+      state.addresses = [...state.addresses, payload];
     },
     logout: (state, { payload }) => {
       state.status = "not-authenticated";
       state.uid = null;
       state.name = null;
+      state.addresses = [];
       state.img = null;
       state.errorMessage = payload;
     },
@@ -34,4 +40,4 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { login, logout, checkingCredentials } = authSlice.actions;
+export const { login, logout, checkingCredentials, setAddresses } = authSlice.actions;

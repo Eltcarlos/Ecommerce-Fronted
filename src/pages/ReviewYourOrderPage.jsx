@@ -2,10 +2,10 @@ import React from "react";
 import { Checkout } from "../components/Checkout/Checkout";
 import Review from "../components/Checkout/Review";
 
-export const ReviewYourOrderPage = () => {
+export const ReviewYourOrderPage = ({ setForm, form }) => {
   return (
     <Checkout>
-      <Review />
+      <Review setForm={setForm} form={form} />
     </Checkout>
   );
 };

@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Card,
-  CardActions,
   CardContent,
   Collapse,
   Divider,
@@ -23,7 +22,6 @@ import { removeAddress } from "../../store/auth/thunks";
 const Address = ({ name, address, phoneNumber, id }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  console.log(id);
 
   return (
     <Card
