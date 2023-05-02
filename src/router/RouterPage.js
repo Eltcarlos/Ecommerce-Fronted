@@ -22,11 +22,14 @@ import { NotFoundPage } from "../pages/NotFoundPage";
 import { DashBoard } from "../pages/DashBoard/Admin/DashBoard";
 import { Transactions } from "../pages/DashBoard/Admin/Transactions";
 import { OverView } from "../pages/DashBoard/Admin/OverView";
-import { PaymentPage } from "../pages/PaymentPage";
+import { ShippingAddressPage } from "../pages/ShippingAddressPage";
+import { PaymentDetailsPage } from "../pages/PaymentDetailsPage";
+import { ReviewYourOrderPage } from "../pages/ReviewYourOrderPage";
 
 const RouterPages = () => {
   const [showCart, setShowCart] = useState(false);
   const { productsCart } = useSelector((state) => state.globalState);
+  const [form, setForm] = useState();
 
   useEffect(() => {
     if (productsCart.length > 0) {
@@ -45,7 +48,15 @@ const RouterPages = () => {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/auth/register" element={<RegisterPage />} />
         <Route path="/*" element={<NotFoundPage />} />
-        <Route path="/checkout" element={<PaymentPage />} />
+        <Route path="/checkout/shippingAddress" element={<ShippingAddressPage setForm={setForm} form={form} />} />
+        <Route
+          path="/checkout/shippingAddress/paymentsDetails"
+          element={<PaymentDetailsPage setForm={setForm} form={form} />}
+        />
+        <Route
+          path="/checkout/shippingAddress/paymentsDetails/reviewYourOrders"
+          element={<ReviewYourOrderPage setForm={setForm} form={form} />}
+        />
         {/* Private Public Routes */}
         <Route element={<ProtectedRouter />}>
           <Route path="/accountHome" element={<AccountHome />} />

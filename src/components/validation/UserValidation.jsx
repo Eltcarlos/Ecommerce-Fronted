@@ -43,3 +43,23 @@ export const PasswordDetailsValidation = yup.object().shape({
     .matches(/(?=.*[0-9])/, "Password must contain a number"),
   confirmPassword: yup.string().oneOf([yup.ref("newPassword")], "Your passwords do not match."),
 });
+
+export const AddressValidation = yup.object().shape({
+  name: yup.string().min(5, "Name must be at least 5 characters").max(20, "Name must be less than 20 characters"),
+  country: yup
+    .string()
+    .min(2, "Country must be at least 2 characters")
+    .max(20, "Country must be less than 20 characters"),
+  state: yup.string().min(2, "State must be at least 2 characters").max(20, "State must be less than 20 characters"),
+  city: yup.string().min(2, "City must be at least 2 characters").max(20, "City must be less than 20 characters"),
+  postalCode: yup.number(),
+  address: yup
+    .string()
+    .min(2, "Address must be at least 2 characters")
+    .max(20, "Address must be less than 20 characters"),
+  location: yup
+    .string()
+    .min(2, "Location must be at least 2 characters")
+    .max(20, "Location must be less than 20 characters"),
+  phoneNumber: yup.number(),
+});

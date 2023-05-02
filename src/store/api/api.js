@@ -44,6 +44,10 @@ export const api = createApi({
       }),
       providesTags: ["Admins"],
     }),
+    getDirections: build.query({
+      query: (id) => `api/client/directions/${id}`,
+      providesTags: ["ClientID"],
+    }),
   }),
 });
 
@@ -55,4 +59,5 @@ export const {
   useGetAdminsQuery,
   useGetClientsQuery,
   useGetProductsPaginationQuery,
+  useGetDirectionsQuery,
 } = api;

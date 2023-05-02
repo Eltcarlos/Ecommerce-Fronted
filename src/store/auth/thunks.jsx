@@ -71,3 +71,36 @@ export const changePassword = (form) => {
     }
   };
 };
+
+export const newAddress = (form) => {
+  return async () => {
+    try {
+      const result = await fetchConToken("api/client/newDirection", form, "PUT");
+      if (!result.ok) {
+        toast.error(result.msg);
+        return;
+      }
+      toast.success(result.msg);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const removeAddress = (id) => {
+  return async () => {
+    try {
+      const data = { id };
+      const result = await fetchConToken("api/client/directions/remove", data, "PUT");
+      if (!result.ok) {
+        toast.error(result.msg);
+        return;
+      }
+      toast.success(result.msg);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
