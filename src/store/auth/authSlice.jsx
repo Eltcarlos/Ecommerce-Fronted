@@ -24,6 +24,9 @@ export const authSlice = createSlice({
     setAddresses: (state, { payload }) => {
       state.addresses = [...state.addresses, payload];
     },
+    removeAddresses: (state, { payload }) => {
+      state.addresses = state.addresses.filter((index) => index.id !== payload);
+    },
     logout: (state, { payload }) => {
       state.status = "not-authenticated";
       state.uid = null;
@@ -40,4 +43,4 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { login, logout, checkingCredentials, setAddresses } = authSlice.actions;
+export const { login, logout, checkingCredentials, setAddresses, removeAddresses } = authSlice.actions;

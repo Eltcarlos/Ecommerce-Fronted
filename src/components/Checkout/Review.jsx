@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
 import { Box, Button, Card, CardContent, Collapse } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
 
@@ -17,9 +17,10 @@ const Address = ({ name, setHiddenButton, setForm, form, id, setOrder }) => {
     setHiddenButton(false);
     const newValues = {
       ...form,
-      Address,
+      ...Address,
     };
     setForm(newValues);
+    console.log(form);
     setOrder(true);
   };
   return (
@@ -48,16 +49,17 @@ const Address = ({ name, setHiddenButton, setForm, form, id, setOrder }) => {
 const Review = ({ setForm, form }) => {
   const { productsCart, subTotal } = useSelector((index) => index.globalState);
   const { addresses } = useSelector((index) => index.authState);
-  const hiddenCart = "************" + form?.cardNumber.slice(15, 20);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  console.log(pathname.substring(1));
+  const hiddenCart = "************" + form?.cardNumber.slice(15, 20);
   const [hiddenButton, setHiddenButton] = useState(true);
   const [order, setOrder] = useState(false);
-  console.log(form);
-  const back = () => {
-    const Newform = (form.Address = {});
-    setForm(Newform);
-    navigate("/checkout/ShippingAddress/paymentsDetails");
+  const addAddress = () => {
+    localStorage.setItem("path-addressBook", pathname.substring(1));
+    navigate("/addressBook");
   };
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -114,7 +116,7 @@ const Review = ({ setForm, form }) => {
             Address
           </Typography>
           {addresses.length === 0 ? (
-            <Button type="submit" variant="contained" sx={{ mt: 3, ml: 1 }}>
+            <Button type="submit" variant="contained" sx={{ mt: 3, ml: 1 }} onClick={() => addAddress()}>
               Agregar Direccion
             </Button>
           ) : (
@@ -126,7 +128,7 @@ const Review = ({ setForm, form }) => {
                       <Address
                         key={key}
                         id={index.id}
-                        name={index.name}
+                        name={index.nameAddress}
                         hiddenButton={hiddenButton}
                         setHiddenButton={setHiddenButton}
                         setForm={setForm}
@@ -141,18 +143,18 @@ const Review = ({ setForm, form }) => {
           )}
           <Collapse in={!hiddenButton} timeout="auto" unmountOnExit>
             <Box>
-              <Typography gutterBottom>Name Address: {form?.Address?.name}</Typography>
-              <Typography gutterBottom>Address: {form?.Address?.address}</Typography>
-              <Typography gutterBottom>Location: {form?.Address?.location}</Typography>
-              <Typography gutterBottom>Number: {form?.Address?.phoneNumber}</Typography>
+              <Typography gutterBottom>Name Address: {form?.nameAddress}</Typography>
+              <Typography gutterBottom>Address: {form?.address}</Typography>
+              <Typography gutterBottom>Location: {form?.location}</Typography>
+              <Typography gutterBottom>Number: {form?.phoneNumber}</Typography>
             </Box>
           </Collapse>
         </Grid>
       </Grid>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button sx={{ mt: 3, ml: 1 }} onClick={() => back()}>
-          back
-        </Button>
+        <Link to="/checkout/ShippingAddress/paymentsDetails">
+          <Button sx={{ mt: 3, ml: 1 }}>back</Button>
+        </Link>
         <Button type="submit" variant="contained" sx={{ mt: 3, ml: 1 }} disabled={!order}>
           Place Order
         </Button>

@@ -10,9 +10,13 @@ import { useDispatch } from "react-redux";
 import { newAddress } from "../../store/auth/thunks";
 import { v4 as uuidv4 } from "uuid";
 import { setAddresses } from "../../store/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 export const NewAddress = ({ setAdd }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const path = localStorage.getItem("path-addressBook");
+  console.log(path);
   return (
     <LayoutDashBoard>
       <CssBaseline />
@@ -26,7 +30,7 @@ export const NewAddress = ({ setAdd }) => {
         <Formik
           initialValues={{
             id: uuidv4(),
-            name: "",
+            nameAddress: "",
             country: "",
             state: "",
             city: "",
@@ -37,7 +41,7 @@ export const NewAddress = ({ setAdd }) => {
           }}
           onSubmit={(values) => {
             if (
-              values.name === "" ||
+              values.nameAddress === "" ||
               values.country === "" ||
               values.state === "" ||
               values.city === "" ||
@@ -52,6 +56,13 @@ export const NewAddress = ({ setAdd }) => {
             dispatch(newAddress(values));
             dispatch(setAddresses(values));
             setAdd(false);
+            if (path !== null) {
+              navigate(`/${path}`);
+            } else {
+              window.location.reload();
+            }
+
+            localStorage.removeItem("path-addressBook");
           }}
           validationSchema={AddressValidation}
         >
@@ -66,7 +77,12 @@ export const NewAddress = ({ setAdd }) => {
                     Nombre de la Direccion:
                   </Typography>
                 </Box>
-                <Inputs label="nombre de la direccion" name="name" type="text" placeholder="nombre de la direccion" />
+                <Inputs
+                  label="nombre de la direccion"
+                  name="nameAddress"
+                  type="text"
+                  placeholder="nombre de la direccion"
+                />
               </Box>
               <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <Box sx={{ width: "300px" }}>

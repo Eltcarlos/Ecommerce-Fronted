@@ -99,8 +99,8 @@ export const AddressBook = () => {
               "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
             }}
           >
-            {data.map(({ id, name, address, phoneNumber }) => (
-              <Address key={id} id={id} name={name} address={address} phoneNumber={phoneNumber} />
+            {data.map(({ id, nameAddress, address, phoneNumber }) => (
+              <Address key={id} id={id} name={nameAddress} address={address} phoneNumber={phoneNumber} />
             ))}
           </Box>
         ) : (

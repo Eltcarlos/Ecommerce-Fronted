@@ -1,4 +1,4 @@
-import { checkingCredentials, login } from "./authSlice";
+import { checkingCredentials, login, removeAddresses } from "./authSlice";
 import { fetchConToken, fetchSinToken } from "../../helpers/Fetch";
 import toast from "react-hot-toast";
 
@@ -81,7 +81,6 @@ export const newAddress = (form) => {
         return;
       }
       toast.success(result.msg);
-      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -89,7 +88,7 @@ export const newAddress = (form) => {
 };
 
 export const removeAddress = (id) => {
-  return async () => {
+  return async (dispatch) => {
     try {
       const data = { id };
       const result = await fetchConToken("api/client/directions/remove", data, "PUT");
@@ -97,6 +96,7 @@ export const removeAddress = (id) => {
         toast.error(result.msg);
         return;
       }
+      dispatch(removeAddresses(id));
       toast.success(result.msg);
       window.location.reload();
     } catch (error) {

@@ -8,6 +8,7 @@ import { Box, Button } from "@mui/material";
 
 export const AddressForm = ({ setForm, form }) => {
   const navigate = useNavigate();
+  console.log(form);
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -58,13 +59,13 @@ export const AddressForm = ({ setForm, form }) => {
                 <Inputs label="Document Type" name="docType" type="text" placeholder="Document Type" />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Inputs label="Document Number" name="docNumber" type="number" placeholder="79555302" />
+                <Inputs label="Document Number" name="docNumber" type="text" placeholder="79555302" />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Inputs label="Phone" name="phone" type="number" placeholder="Phone" />
+                <Inputs label="Phone" name="phone" type="text" placeholder="Phone" />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Inputs label="Cell Phone" name="CellPhone" type="number" placeholder="Cell Phone" />
+                <Inputs label="Cell Phone" name="CellPhone" type="text" placeholder="Cell Phone" />
               </Grid>
             </Grid>
 

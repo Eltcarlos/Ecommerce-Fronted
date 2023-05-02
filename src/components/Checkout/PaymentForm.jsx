@@ -20,10 +20,10 @@ export const PaymentForm = ({ setForm, form }) => {
       </Typography>
       <Formik
         initialValues={{
-          cardNumber: "",
-          expiryDate: "",
-          cvc: "",
-          dues: 1,
+          cardNumber: form?.cardNumber ? form.cardNumber : "",
+          expiryDate: form?.expiryDate ? form.expiryDate : "",
+          cvc: form?.cvc ? form.cvc : "",
+          dues: "1",
         }}
         onSubmit={(values) => {
           if (values.cardNumber === "" || values.expiryDate === "" || values.cardCvc === "") {
@@ -35,7 +35,9 @@ export const PaymentForm = ({ setForm, form }) => {
             ...form,
             cardNumber: values.cardNumber,
             dues: values.dues,
-            cardExpYear: values.expiryDate.substring(5, 7),
+            cvc: values.cvc,
+            expiryDate: values.expiryDate,
+            cardExpYear: "20" + values.expiryDate.substring(5, 7),
             cardExpMonth: values.expiryDate.substring(0, 2),
             cardCvc: values.cvc,
           };
