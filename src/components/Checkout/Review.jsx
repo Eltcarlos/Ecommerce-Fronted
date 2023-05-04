@@ -3,11 +3,12 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Card, CardContent, Collapse } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
+import { sendTransaction } from "../../store/client/trunks";
 
 const Address = ({ name, setHiddenButton, setForm, form, id, setOrder }) => {
   const theme = useTheme();
@@ -51,13 +52,22 @@ const Review = ({ setForm, form }) => {
   const { addresses } = useSelector((index) => index.authState);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  console.log(pathname.substring(1));
+  const dispatch = useDispatch();
   const hiddenCart = "************" + form?.cardNumber.slice(15, 20);
   const [hiddenButton, setHiddenButton] = useState(true);
   const [order, setOrder] = useState(false);
   const addAddress = () => {
     localStorage.setItem("path-addressBook", pathname.substring(1));
     navigate("/addressBook");
+  };
+  const onClick = () => {
+    const newForm = {
+      ...form,
+      productsCart,
+    };
+    setForm(newForm);
+    dispatch(sendTransaction(form));
+    // navigate("/accountOrderHistory");
   };
 
   return (
@@ -155,7 +165,7 @@ const Review = ({ setForm, form }) => {
         <Link to="/checkout/ShippingAddress/paymentsDetails">
           <Button sx={{ mt: 3, ml: 1 }}>back</Button>
         </Link>
-        <Button type="submit" variant="contained" sx={{ mt: 3, ml: 1 }} disabled={!order}>
+        <Button onClick={() => onClick()} variant="contained" sx={{ mt: 3, ml: 1 }} disabled={!order}>
           Place Order
         </Button>
       </Box>
